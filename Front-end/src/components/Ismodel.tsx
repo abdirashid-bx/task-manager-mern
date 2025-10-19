@@ -6,32 +6,17 @@ type IsmodelProps = {
  
 };
 
-export default function Ismodel({ handleismodel }) {
+export default function Ismodel({ handleismodel  } : IsmodelProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(""); // extra field example
-
-  // const handleAdd = () => {
-  //   const task={ title,
-  //       description,
-  //       category 
-  //       }
-         
-  //   handletask(task)
-  //   handleismodel(false);
-  // };
+ 
 
   const handleadde=async()=>{
      const result=await Posttask(title,description,category)
      handleismodel(false);
     }
     
-    //  const handledelete=async(id : any)=>{
-    //   console.log("the id",id)
-    //  const result=await Deleteall(id)
-      
-    //  alert(result.messege)
-    // }
   useEffect(()=>{
     console.log(title)
   })

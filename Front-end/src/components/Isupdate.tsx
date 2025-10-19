@@ -1,29 +1,35 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Updatespeciftask } from "../HandleApi/Crud";
 
-type Task = { id: number; cate: string; desc: string; titt: string };
+type Task = {
+  _id: string;
+  cate: string;
+  desc: string;
+  titt: string;
+};
 
 type IsupdateProps = {
   handleismodel: (open: boolean) => void;
-  tasks: Task[];
-  taskId: number;
-  onUpdate: (id: number, data: { title: string; description: string; category: string ,updaterefresh}) => void;
+  task: Task; // single task, not array
+  onUpdateComplete: () => void;
 };
 
-export default function Isupdate({ handleismodel ,tasks,onUpdateComplete}: IsupdateProps) {
- 
+export default function Isupdate({
+  handleismodel,
+  task,
+  onUpdateComplete,
+}: IsupdateProps) {
+  const [title, setTitle] = useState(task?.titt || "");
+  const [description, setDescription] = useState(task?.desc || "");
+  const [category, setCategory] = useState(task?.cate || "");
+  const ref = useRef(0);
 
-  const [title, setTitle] = useState(tasks?.title || "");
-  const [description, setDescription] = useState(tasks?.description || "");
-  const [category, setCategory] = useState(tasks?.category ||"");
-  const ref=useRef(0)
-  
-
-  const handleUpdate = async() => {
-    const result=await Updatespeciftask(title,description,category,tasks?._id)
+  const handleUpdate = async () => {
+    await Updatespeciftask(title, description, category, task._id);
     handleismodel(false);
-   onUpdateComplete()
+    onUpdateComplete();
   };
+
 
 
 

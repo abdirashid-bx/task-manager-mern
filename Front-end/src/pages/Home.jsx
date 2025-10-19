@@ -4,7 +4,7 @@ import Isupdate from "../components/Isupdate";
 import { Deleteall, Getall, Getspeciftask } from "../HandleApi/Crud";
 
 
-type Task = { id: number; cate: string; desc: string; titt: string };
+ 
 
 export default function Home() {
   const [model, setmodel] = useState(false);
@@ -14,40 +14,9 @@ export default function Home() {
   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
  const [updateTrigger, setUpdateTrigger] = useState(0);
   
-  const [task, settask] = useState<Task[]>([]);
+  const [task, settask] = useState([]);
 
-  // const handletask = (tasks: {
-  //   category: string;
-  //   description: string;
-  //   title: string;
-  // }) => {
-  //   const newTask: Task = {
-  //     cate: tasks.category,
-  //     desc: tasks.description,
-  //     titt: tasks.title,
-  //     id: ++ref.current,
-  //   };
-  //   settask((prev) => [newTask, ...prev]);
-  // };
-
-  // const handleUpdateTask = (
-  //   id: number,
-  //   data: { title: string; description: string; category: string }
-  // ) => {
-  //   settask((prev) =>
-  //     prev.map((t) =>
-  //       t.id === id
-  //         ? { ...t, titt: data.title, desc: data.description, cate: data.category }
-  //         : t
-  //     )
-  //   );
-  // };
-
-  // const handleOpenUpdate = (id: number) => {
-  //   setSelectedTaskId(id);
-  //   setupdate(true);
-  // };
- 
+   
   useEffect(()=>{
   const handleget=async()=>{
   const result=await Getall()
@@ -62,13 +31,13 @@ export default function Home() {
     setUpdateTrigger(prev => prev + 1); 
   };
   
-  const handledelete=async(id : string)=>{
+  const handledelete=async(id)=>{
     const result=await Deleteall(id)
     setdlet(!deletes)
     alert(result.messege)
   }
 
-  const handleupdate=async(id:any)=>{
+  const handleupdate=async(id)=>{
     const result=await Getspeciftask(id)
     setupdatetask(result)
     console.log("theupdate result",updatingtask)
@@ -105,9 +74,9 @@ export default function Home() {
         <div className="px-6 py-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {task.map((t, index) => (
             <div
-              key={t._id}
+              key={t?._id}
               
-              onClick={() => handleupdate(t._id)}
+              onClick={() => handleupdate(t?._id)}
               className="cursor-pointer relative bg-white rounded-2xl shadow-md p-6 border border-gray-100 
                          hover:shadow-xl hover:-translate-y-1 transition transform"
             >
