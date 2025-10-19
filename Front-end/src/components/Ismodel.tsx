@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Posttask } from "../HandleApi/Crud";
 
 type IsmodelProps = {
@@ -13,7 +13,7 @@ export default function Ismodel({ handleismodel  } : IsmodelProps) {
  
 
   const handleadde=async()=>{
-     const result=await Posttask(title,description,category)
+     await Posttask(title,description,category)
      handleismodel(false);
     }
     

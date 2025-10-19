@@ -4,8 +4,6 @@ import Isupdate from "../components/Isupdate";
 import { Deleteall, Getall, Getspeciftask } from "../HandleApi/Crud";
 
 
- 
-
 export default function Home() {
   const [model, setmodel] = useState(false);
   const [update, setupdate] = useState(false);
